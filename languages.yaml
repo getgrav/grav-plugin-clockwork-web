@@ -1,0 +1,4 @@
+en:
+  PLUGIN_CLOCKWORK_WEB:
+    ROUTE: Route
+    ROUTE_HELP: Route that is used by the Clockwork Web Interface

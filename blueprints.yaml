@@ -1,0 +1,37 @@
+name: Clockwork Web
+slug: clockwork-web
+type: plugin
+version: 1.0.0
+description: Enables a Web Interface for the Clockwork Debugger
+icon: clock-o
+author:
+  name: Team Grav
+  email: devs@getgrav.org
+  url: https://getgrav.org
+homepage: https://github.com/getgrav/grav-plugin-clockwork-web
+keywords: grav, plugin, clockwork, debugger
+bugs: https://github.com/getgrav/grav-plugin-clockwork-web/issues
+docs: https://github.com/getgrav/grav-plugin-clockwork-web/blob/develop/README.md
+license: MIT
+
+dependencies:
+  - { name: grav, version: '>=1.7.47' }
+
+form:
+  validation: loose
+  fields:
+    enabled:
+      type: toggle
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
+      highlight: 1
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    route:
+      type: text
+      label: PLUGIN_CLOCKWORK_WEB.ROUTE
+      help: PLUGIN_CLOCKWORK_WEB.ROUTE_HELP
+      default: /clockwork
