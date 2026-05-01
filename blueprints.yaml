@@ -1,7 +1,7 @@
 name: Clockwork Web
 slug: clockwork-web
 type: plugin
-version: 1.0.0
+version: 1.0.1
 description: Enables a Web Interface for the Clockwork Debugger
 icon: clock-o
 author:
@@ -13,6 +13,9 @@ keywords: grav, plugin, clockwork, debugger
 bugs: https://github.com/getgrav/grav-plugin-clockwork-web/issues
 docs: https://github.com/getgrav/grav-plugin-clockwork-web/blob/develop/README.md
 license: MIT
+
+compatibility:
+  grav: ['1.7', '2.0']
 
 dependencies:
   - { name: grav, version: '>=1.7.47' }
