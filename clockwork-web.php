@@ -59,23 +59,28 @@ class ClockworkWebPlugin extends Plugin
 
         $uri = $this->grav['uri'];
         $clockwork = $this->grav['debugger']->getClockwork();
-        $route = $this->config->get('plugins.clockwork-web.route');
-        if ($clockwork && $uri->route() === $route) {
-            $this->initializeClockwork();
+        $route = rtrim((string)$this->config->get('plugins.clockwork-web.route'), '/') ?: '/clockwork';
+        $current = $uri->route();
+
+        // Match the route itself and everything beneath it: the UI's own assets
+        // (index.html, js, img) are served from the same prefix.
+        if ($clockwork && ($current === $route || strpos($current, $route . '/') === 0)) {
+            $this->initializeClockwork($route);
         }
     }
 
-    public function initializeClockwork()
+    public function initializeClockwork(string $route): void
     {
-        $locator = $this->grav['locator'];
-        $assets = $locator->findResource('user://assets/clockwork-web', true, true);
-
+        // Serve the Web UI straight from Clockwork's own package through this
+        // route. Copying it into user:// broke on multisite installs, where the
+        // copy lands in user/env/<site>/assets but the URL pointed at
+        // /user/assets, and user/env/ is blocked by the shipped web-server
+        // configs anyway. It also kept a stale copy around across upgrades.
         $clockwork = \Clockwork\Support\Vanilla\Clockwork::init([
              'api' => Utils::url('/__clockwork/'),
              'web' => [
-                 'enable' => true,
-                 'path' => $assets,
-                 'uri' => Utils::url('/user/assets/clockwork-web')
+                 'enable' => Utils::url($route),
+                 'path' => false,
              ]
         ]);
 
