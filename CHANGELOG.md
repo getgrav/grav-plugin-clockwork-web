@@ -1,5 +1,5 @@
 # v1.0.2
-## 08/20/2026
+## 08/25/2026
 
 1. [](#bugfix)
     * Fixed the Clockwork interface failing to load on multisite installs by serving it directly from the plugin instead of copying it into the `user/assets` folder [#1](https://github.com/getgrav/grav-plugin-clockwork-web/issues/1)
